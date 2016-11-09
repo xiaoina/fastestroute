@@ -1,9 +1,9 @@
 package main
 
 import (
-	//"encoding/json"
+	"encoding/json"
 	"fmt"
-	//"os"
+	"os"
 
 	"cmd/Mapping"
 	"cmd/Menu"
@@ -19,16 +19,11 @@ func main() {
 	menu.Intro()
 	route = menu.GetLocations()
 
-	fmt.Println("Locations are: \n")
+	fmt.Println("Locations are:")
 
 	for _, value := range route.Locations {
-		fmt.Println(value)
-		fmt.Println("\n")
+		_ = json.NewEncoder(os.Stdout).Encode(
+			value,
+		)
 	}
-
-	/*	route := Mapping.Route{
-		Locations:     []Mapping.LocationPoint{location1, location2},
-		TotalDistance: 69,
-	}*/
-
 }
