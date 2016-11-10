@@ -1,4 +1,4 @@
-package main
+package fastestroute
 
 import (
 	"encoding/json"
@@ -7,11 +7,15 @@ import (
 )
 
 var (
-	menu  Menu
-	route Route
+	menu   Menu
+	route  Route
+	config Config
 )
 
 func main() {
+
+	getConfiguration()
+
 	menu.Intro()
 	route = menu.GetLocations()
 

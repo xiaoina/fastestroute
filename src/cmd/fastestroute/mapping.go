@@ -1,15 +1,10 @@
-package main
+package fastestroute
 
 import (
 	"encoding/json"
 	"fmt"
 	"io/ioutil"
 	"net/http"
-)
-
-var (
-	key     = "AIzaSyD_HgYTZ0kHqXwStMx3JfLitzkrimNBl0E"
-	baseurl = "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s"
 )
 
 //GoogleMapsResponse ...
@@ -86,7 +81,7 @@ func getLocations(body []byte) (*GoogleMapsResponse, error) {
 func (r *Route) GetLocation(s []string) {
 	responses := make([]GoogleMapsResponse, len(s))
 	for i := 0; i < len(s); i++ {
-		resp, err := http.Get(fmt.Sprintf(baseurl, TrimString(s[i]), key))
+		resp, err := http.Get(fmt.Sprintf(config.baseurl, TrimString(s[i]), config.key))
 		if err != nil {
 			panic(err.Error())
 		}

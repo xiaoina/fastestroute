@@ -1,0 +1,2 @@
+key     = "AIzaSyD_HgYTZ0kHqXwStMx3JfLitzkrimNBl0E"
+baseurl = "https://maps.googleapis.com/maps/api/geocode/json?address=%s&key=%s"
