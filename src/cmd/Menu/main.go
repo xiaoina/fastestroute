@@ -8,16 +8,19 @@ import (
 	"cmd/Mapping"
 )
 
+//Menu ...
 type Menu struct{}
 
 var (
 	route Mapping.Route
 )
 
+//Intro prints the intro to the fastest route generator
 func (m *Menu) Intro() {
 	fmt.Println("Welcome to fastest route")
 }
 
+//GetLocations ...
 func (m *Menu) GetLocations() Mapping.Route {
 	reader := bufio.NewReader(os.Stdin)
 
@@ -39,11 +42,7 @@ func (m *Menu) GetLocations() Mapping.Route {
 		stringLocations = append(stringLocations, s)
 	}
 
-	route.AppendStringLocations(stringLocations)
+	route.GetLocation(stringLocations)
 
 	return route
-}
-
-func (m *Menu) EnterCommand(s string) {
-
 }
