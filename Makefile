@@ -1,4 +1,4 @@
-.PHONY: lint test vendor_clean vendor_get vendor_update
+.PHONY: default build lint test clean vendor_clean vendor_get vendor_update vet all
 
 GOPATH := ${PWD}/vendor
 export GOPATH
