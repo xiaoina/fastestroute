@@ -8,15 +8,15 @@ projname = fastestroute
 default: vendor_get lint test build
 	
 build: vet
-	gb build ${projname}
+	gb build all
 
 lint:
-	golint ./src/cmd/${projname} > lint.txt
+	golint ./src/${projname} > lint.txt
 
 test:
-	go test ./src/cmd/${projname} -cover -v -coverprofile=cover.out > test.out
+	go test ./src/${projname} -cover -v -coverprofile=cover.out > test.out
 
-clean:
+clean: vendor_clean
 	rm -rf pkg/*
 	rm -rf bin/*
 	rm lint.txt
@@ -37,7 +37,9 @@ vendor_update: vendor_get
 	&& rm -rf `find ./vendor/src -type d -name .svn`
 
 vet:
-	go vet ./src/cmd/...
+	go vet ./src/...
+
+all: clean default
 
 # go2xunit -fail -input test.out -output test.xml
 # gocov convert cover.out | gocov-xml > coverage.xml

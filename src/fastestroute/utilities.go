@@ -1,4 +1,4 @@
-package fastestroute
+package main
 
 import (
 	"strings"

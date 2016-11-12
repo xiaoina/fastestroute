@@ -1,4 +1,4 @@
-package fastestroute
+package main
 
 import (
 	"encoding/json"
@@ -81,7 +81,7 @@ func getLocations(body []byte) (*GoogleMapsResponse, error) {
 func (r *Route) GetLocation(s []string) {
 	responses := make([]GoogleMapsResponse, len(s))
 	for i := 0; i < len(s); i++ {
-		resp, err := http.Get(fmt.Sprintf(config.baseurl, TrimString(s[i]), config.key))
+		resp, err := http.Get(fmt.Sprintf(config.Baseurl, TrimString(s[i]), config.Key))
 		if err != nil {
 			panic(err.Error())
 		}
