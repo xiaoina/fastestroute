@@ -8,7 +8,7 @@ projname = fastestroute
 default: vendor_get lint test build
 	
 build: vet
-	gb build all
+	gb build ${projname}
 
 lint:
 	golint ./src/${projname} > lint.txt
