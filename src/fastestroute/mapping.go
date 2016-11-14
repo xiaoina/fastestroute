@@ -1,12 +1,5 @@
 package main
 
-import (
-	"encoding/json"
-	"fmt"
-	"io/ioutil"
-	"net/http"
-)
-
 //GoogleMapsResponse ...
 type GoogleMapsResponse struct {
 	Results Results `json:"results"`
@@ -59,42 +52,4 @@ type Northeast struct {
 type Southwest struct {
 	Lat float64 `json:"lat"`
 	Lng float64 `json:"lng"`
-}
-
-//Route ...
-type Route struct {
-	Locations     []GoogleMapsResponse `json:"response"`
-	TotalDistance float64              `json:"totaldistance"`
-}
-
-//...
-func getLocations(body []byte) (*GoogleMapsResponse, error) {
-	var s = new(GoogleMapsResponse)
-	err := json.Unmarshal(body, &s)
-	if err != nil {
-		fmt.Println("whoops:", err)
-	}
-	return s, err
-}
-
-//GetLocation ...
-func (r *Route) GetLocation(s []string) {
-	responses := make([]GoogleMapsResponse, len(s))
-	for i := 0; i < len(s); i++ {
-		resp, err := http.Get(fmt.Sprintf(config.Baseurl, TrimString(s[i]), config.Key))
-		if err != nil {
-			panic(err.Error())
-		}
-		defer resp.Body.Close()
-		body, err := ioutil.ReadAll(resp.Body)
-		if err != nil {
-			panic(err.Error())
-		}
-		response, err := getLocations([]byte(body))
-		if err != nil {
-			panic(err.Error())
-		}
-		responses[i] = *response
-	}
-	r.Locations = responses
 }
