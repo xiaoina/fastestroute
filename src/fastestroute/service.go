@@ -16,7 +16,7 @@ type RouteService interface {
 type routeService struct{}
 
 func (routeService) Route(s []string) ([]GoogleMapsResponse, error) {
-	responses := make([]GoogleMapsResponse, len(s))
+	unorderedResponses := make([]GoogleMapsResponse, len(s))
 	for i := 0; i < len(s); i++ {
 		resp, err := http.Get(fmt.Sprintf(config.Baseurl, TrimString(s[i]), config.Key))
 		if err != nil {
@@ -31,9 +31,19 @@ func (routeService) Route(s []string) ([]GoogleMapsResponse, error) {
 		if err != nil {
 			panic(err.Error())
 		}
-		responses[i] = *response
+		unorderedResponses[i] = *response
+	}
+	responses, err := calculateRoute(g)
+	if err != nil {
+		panic(err.Error())
 	}
 	return responses, nil
+}
+
+func calculateRoute(g []GoogleMapsResponse) ([]GoogleMapsResponse, error) {
+	orderedResponses := make([]GoogleMapsResponse, len(g))
+
+	return orderedResponses, nil
 }
 
 //...

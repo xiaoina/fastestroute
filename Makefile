@@ -14,7 +14,7 @@ lint:
 	golint ./src/${projname} > lint.txt
 
 test:
-	go test ./src/${projname} -cover -v -coverprofile=cover.out > test.out
+	go test ./src/tests -cover -v -coverprofile=cover.out > test.out
 
 clean_build:
 	rm -rf pkg/*
