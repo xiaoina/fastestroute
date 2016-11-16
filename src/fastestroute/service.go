@@ -33,7 +33,7 @@ func (routeService) Route(s []string) ([]GoogleMapsResponse, error) {
 		}
 		unorderedResponses[i] = *response
 	}
-	responses, err := calculateRoute(g)
+	responses, err := calculateRoute(unorderedResponses)
 	if err != nil {
 		panic(err.Error())
 	}
